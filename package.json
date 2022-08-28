@@ -1,0 +1,17 @@
+{
+  "name": "unsplash-images",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "build": "npm run build --workspace=client",
+    "start": "concurrently \"npm run start --workspace=serverless-api\" \"npm run start --workspace=client\""
+  },
+  "workspaces": [
+    "client",
+    "serverless-api"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "concurrently": "^7.3.0"
+  }
+}

@@ -1,0 +1,22 @@
+.App {
+  text-align: center;
+}
+
+div.form {
+  margin: 20px;
+}
+
+input,
+button {
+  padding: 10px;
+}
+
+input {
+  margin-right: 10px;
+}
+
+img {
+  height: 300px;
+  object-fit: cover;
+  width: 400px;
+}
