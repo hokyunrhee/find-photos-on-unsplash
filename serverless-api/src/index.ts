@@ -6,14 +6,14 @@ type UnsplashResponse = {
   results: { id: number; urls: { small: string }; links: { html: string } }[];
 };
 
-const corsHeaders = {
-  "Access-Control-Allow-Headers": "*",
-  "Access-Control-Allow-Methods": "GET",
-  "Access-Control-Allow-Origin": "*",
-};
+const DEFAULT_ALLOWED_ORIGIN = "https://cloudflare-for-me-1.pages.dev";
+const ALLOWED_ORIGINS = ["http://localhost:3000", DEFAULT_ALLOWED_ORIGIN];
 
 export default {
   async fetch(request: Request, env: ENV): Promise<Response> {
+    const origin = checkOrigin(request);
+    const corsHeaders = createCorsHeaders(origin);
+
     if (request.method === "OPTIONS") {
       return new Response("OK", { headers: corsHeaders });
     }
@@ -29,12 +29,32 @@ export default {
   },
 };
 
-async function getImages(
+const checkOrigin = (request: Request) => {
+  const origin = request.headers.get("Origin");
+
+  if (!origin) {
+    return DEFAULT_ALLOWED_ORIGIN;
+  }
+
+  const foundOrigin = ALLOWED_ORIGINS.includes(origin);
+
+  return foundOrigin ? origin : DEFAULT_ALLOWED_ORIGIN;
+};
+
+const createCorsHeaders = (origin: string) => ({
+  "Access-Control-Allow-Headers": "*",
+  "Access-Control-Allow-Methods": "GET",
+  "Access-Control-Allow-Origin": origin,
+});
+
+const getImages = async (
   request: Request,
   accessKey: string
-): Promise<Response> {
+): Promise<Response> => {
   const { searchParams } = new URL(request.url);
   const query = searchParams.get("query");
+  const origin = checkOrigin(request);
+  const corsHeaders = createCorsHeaders(origin);
 
   if (!query) {
     return new Response("query is missing", {
@@ -64,4 +84,4 @@ async function getImages(
       ...corsHeaders,
     },
   });
-}
+};
