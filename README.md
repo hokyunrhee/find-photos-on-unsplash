@@ -1,12 +1,12 @@
-# Cloudflare for me #1
+# Find photos on unsplash
 
 ## About
 
-Unsplash 이미지를 검색할 수 있습니다.
+Unsplash 이미지를 검색할 수 있습니다. Cloudflare의 솔루션을 학습하기 위해 만들었습니다.
 
 ## Demo
 
-[link](https://cloudflare-for-me-1.pages.dev)
+[link](https://find-photos-on-unsplash.pages.dev)
 
 ## Cloudflare Features Used
 

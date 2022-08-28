@@ -6,7 +6,7 @@ type UnsplashResponse = {
   results: { id: number; urls: { small: string }; links: { html: string } }[];
 };
 
-const DEFAULT_ALLOWED_ORIGIN = "https://cloudflare-for-me-1.pages.dev";
+const DEFAULT_ALLOWED_ORIGIN = "https://find-photos-on-unsplash.pages.dev";
 const ALLOWED_ORIGINS = ["http://localhost:3000", DEFAULT_ALLOWED_ORIGIN];
 
 export default {
